@@ -94,7 +94,7 @@ summon[Pipeline[_]] ex 3
 
 ## Documentation
 
-Learn more on [Teseo](https://teseo.github.io)!
+Learn more on [Teseo](https://pablf.github.io)!
 
 ## Contributing
 
