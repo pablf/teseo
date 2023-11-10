@@ -26,8 +26,8 @@ private[teseo] object AlgmGenMacro {
 
   /**
    * Obtains the appropriate information from type parameters
-   *    - type `T` extending `Algm[A, B] { type CC = C}` returns `List(TypeRepr.of[T], TypeRepr.of[A], TypeRepr.of[B])`
-   *    - type `T[C <: Conf]` extending `Algm[A, B] { type CC = C}` returns `List(TypeRepr.of[T], TypeRepr.of[C], TypeRepr.of[A], TypeRepr.of[B])`
+   *   - type `T` extending `Algm[A, B] { type CC = C}` returns `List(TypeRepr.of[T], TypeRepr.of[A], TypeRepr.of[B])`
+   *   - type `T[C <: Conf]` extending `Algm[A, B] { type CC = C}` returns `List(TypeRepr.of[T], TypeRepr.of[C], TypeRepr.of[A], TypeRepr.of[B])`
    */
   private def process(using Quotes)(t: quotes.reflect.TypeRepr): List[quotes.reflect.TypeRepr] = {
 
@@ -188,20 +188,6 @@ private[teseo] object AlgmGenMacro {
 
       }
 
-    /*case Mode.Zip =>
-                                    '{
-                                        type c1 <: Conf
-                                        type c2 <: Conf
-                                        ${left.asInstanceOf[Expr[AlgmImpl[a1, b1, c1]]]}
-                                            .and[a2, b2, c2](${right}.asInstanceOf[AlgmImpl[a2, b2, c2]])
-                                    } match {
-                                        case '{
-                                            type c1 <: Conf
-                                            type c2 <: Conf
-                                            $to
-                                        } => (to, Type.of[Conf.And[c1, c2]], a1, b2)
-                                    }*/
-
     val algmImpl = algmImpl1 match
       case standalone :: Nil => standalone._1
       case _                 =>
@@ -307,31 +293,6 @@ private[teseo] object AlgmGenMacro {
               )
             }
             Select.overloaded(Ref(dir), "or", zipTpes, args).asExprOf[AlgmImpl[?, ?, ? <: Conf]]
-
-          case _ =>
-            algmImpl1
-              .reduce[(Expr[AlgmImpl[_, _, _ <: Conf]], Type[? <: AnyKind], Type[? <: AnyKind], Type[? <: AnyKind])] { case ((left, c1, a1, b1), (right, c2, a2, b2)) =>
-                (a1, b1, a2, b2) match {
-                  case ('[a1], '[b1], '[a2], '[b2]) =>
-                    mde match
-                      case Mode.Alternatives =>
-                        '{
-                          type c1 <: Conf
-                          type c2 <: Conf
-                          ${ left.asInstanceOf[Expr[AlgmImpl[a1, b1, c1]]] }
-                            .or[c2](${ right }.asInstanceOf[AlgmImpl[a1, b1, c2]])
-                        } match {
-                          case '{
-                                type c1 <: Conf
-                                type c2 <: Conf
-                                $to
-                              } =>
-                            (to, Type.of[Conf.Or[c1, c2]], a1, b2)
-                        }
-
-                }
-              }
-              ._1
 
     val aTpe = mde match
       case Mode.Pipeline     =>
