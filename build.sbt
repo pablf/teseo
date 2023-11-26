@@ -22,7 +22,7 @@ fork in Test := true
 scalacOptions += "-Ywarn-unused"
 
 ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
-sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+sonatypeRepository                 := "https://s01.oss.sonatype.org/service/local"
 
 addCommandAlias("fmt", "; all scalafmtSbt scalafmtAll")
 addCommandAlias("check", "; scalafmtSbtCheck; scalafmtCheckAll")
