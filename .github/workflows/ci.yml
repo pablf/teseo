@@ -5,7 +5,9 @@ env:
   JVM_OPTS: -XX:+PrintCommandLineFlags # for Java 8 only (sadly, it is not modern enough for JDK_JAVA_OPTIONS)
 
 on:
-  workflow_dispatch:
+  release:
+    types:
+      - published
   pull_request:
   push:
     branches: ['main']
