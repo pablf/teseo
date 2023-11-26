@@ -5,10 +5,11 @@ env:
   JVM_OPTS: -XX:+PrintCommandLineFlags # for Java 8 only (sadly, it is not modern enough for JDK_JAVA_OPTIONS)
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches: ['main']
-  workflow_dispatch
+  
 
 jobs:
   lint:
