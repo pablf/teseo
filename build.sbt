@@ -5,7 +5,8 @@ name := "teseo"
 inThisBuild(
   List(
     scalaVersion := "3.3.1",
-    homepage     := None,
+    organization := "io.github.pablf",
+    homepage     := Some(url("https://github.com/pablf/teseo")),
     licenses     := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     developers   := List(
       Developer(
