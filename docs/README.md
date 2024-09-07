@@ -91,11 +91,6 @@ import Pipeline.given
 summon[Pipeline[_]] ex 3
 ```
 
-
-## Documentation
-
-Learn more on [Teseo](https://pablf.github.io)!
-
 ## Contributing
 
 Contributions are welcomed. Feedback is also very important, so any comment is highly appreciated. Thanks!
